@@ -2,31 +2,44 @@ import { Injectable } from '@nestjs/common';
 import * as fs from 'fs';
 import { parse } from 'dotenv';
 
-
 @Injectable()
 export class ConfigService {
-    private readonly envConfig: { [key:string]:string }
+    private readonly envConfig: { [key: string]: string }
     constructor() {
-        const isDevelopmentEnv = process.env.NODE_ENV !== 'production'
-        if (isDevelopmentEnv){
-            const envFilePath = __dirname + '/../../test/.env.development'
-            const existsPatch = fs.existsSync(envFilePath)
-            if (!existsPatch) {
-                console.log('.env.develioment no existe DEVELOMENT')
-                process.exit(0)
-            }
-            this.envConfig = parse(fs.readFileSync(envFilePath))
+        const env = process.env.NODE_ENV || 'development'
+        const envFilePath = `${__dirname}/../../.env.${env}`
+        const existsPatch = fs.existsSync(envFilePath)
+        if (!existsPatch) {
+            console.log(`.env.${process.env.NODE_ENV} no existe`)
+            process.exit(0)
         }
-        else{
-            const envFilePath = __dirname + '/../../test/.env.production'
-            const existsPatch = fs.existsSync(envFilePath)
-            if (!existsPatch) {
-                console.log('.env.production no existe PRODUCTION')
-            }
-            this.envConfig = parse(fs.readFileSync(envFilePath))
+        this.envConfig = parse(fs.readFileSync(envFilePath))
+
+        //console.log("*********",envFilePath)
+
+        /*const isDevelopmentEnv = process.env.NODE_ENV !== 'production'
+    if(isDevelopmentEnv|| env){
+        const envFilePath= __dirname +'/../../.env.development'
+        const existPath = fs.existsSync(envFilePath)
+        if(!existPath){
+            console.log('.env.development no existe DEVELOPMENT')
+            process.exit(0)
         }
+        this.envConfig=parse(fs.readFileSync(envFilePath))
     }
-    get (key: string): string {
+    else
+    {
+        const envFilePath= __dirname +'/../../.env.production'
+        const existPath = fs.existsSync(envFilePath)
+        if(!existPath){
+            console.log('.env.production no existe PRODUCTION')
+            process.exit(0)
+    }
+        this.envConfig=parse(fs.readFileSync(envFilePath))        
+    }
+        */
+    }
+    get(key: string): string {
         return this.envConfig[key];
     }
 
