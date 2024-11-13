@@ -21,4 +21,4 @@ Content-Type: application/json
 
 ### users
 GET http://localhost:3000/users
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsImlkIjoxLCJpYXQiOjE3MzA2NTI1ODAsImV4cCI6MTczMDY1MjY0MH0.6I7OeAEB4GD5u-DIMTtSXMvpgSaaatktqee7lWAScH4
+Authorization: Bearer 
