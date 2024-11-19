@@ -7,9 +7,11 @@ import { AuthController } from './modules/auth/auth.controller';
 import { AuthService } from './modules/auth/auth.service';
 import { DatabaseModule } from './database/database.module';
 import { ConfigModule } from './config/config.module';
+import { CategoriaModule } from './modules/categoria/categoria.module';
+import { PersonaModule } from './modules/persona/persona.module';
 
 @Module({
-  imports: [AurhModule, UsersModule, DatabaseModule, ConfigModule],
+  imports: [AurhModule, UsersModule, DatabaseModule, ConfigModule, CategoriaModule, PersonaModule],
   controllers: [AppController, AuthController],
   providers: [AppService, AuthService], 
 })
