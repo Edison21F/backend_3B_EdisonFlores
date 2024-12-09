@@ -4,13 +4,16 @@ import { UpdateCategoriaDto } from './dto/update-categoria.dto';
 import { Repository } from 'typeorm';
 import { Categoria } from './entities/categoria.entity';
 
-@Injectable()
+//@Injectable()
 export class CategoriaService {
 
   constructor(@Inject('Categoria_Repository') private categoriaRepository:Repository<Categoria>){}
 
-  create(createCategoriaDto: CreateCategoriaDto) {
-    return 'This action adds a new categoria';
+  async create(createCategoriaDto: CreateCategoriaDto) {
+    const categoria = new Categoria()
+    categoria.nombre=createCategoriaDto.nombre
+    categoria.detalle=createCategoriaDto.detalle
+    return await this.categoriaRepository.save(categoria)
   }
 
   async findAll() {
